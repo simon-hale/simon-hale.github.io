@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+h1:lang(zh-Hans), h2:lang(zh-Hans), h3:lang(zh-Hans), h4:lang(zh-Hans) {
+  letter-spacing: 0;
+}
+
+:lang(zh-Hans) .eyebrow { letter-spacing: 0; }
+
+button, input, textarea, select {
+  font: inherit;
+}

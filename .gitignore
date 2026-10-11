@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# System files
+.DS_Store
+
+# Logs
+*.log
+
+# ========================================
+# Private portfolio content
+# ========================================
+
+/src/content/profile.ts
+/src/content/academic.ts
+/src/content/works.ts
+/src/content/honors.ts
+
+# ========================================
+# Private media
+# ========================================
+
+/public/images/
+/public/documents/

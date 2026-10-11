@@ -1,0 +1,27 @@
+.page-enter-active,
+.page-leave-active { transition: opacity 220ms ease, transform 220ms ease; }
+.page-enter-from { opacity: 0; transform: translateY(8px); }
+.page-leave-to { opacity: 0; transform: translateY(-4px); }
+
+.media-skeleton {
+  background: linear-gradient(90deg, var(--skeleton-low) 0%, var(--skeleton-mid) 40%, var(--skeleton-high) 50%, var(--skeleton-mid) 60%, var(--skeleton-low) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.media-reveal,
+.media-skeleton { transition: background-color 200ms ease, color 200ms ease; }
+
+@keyframes skeleton-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

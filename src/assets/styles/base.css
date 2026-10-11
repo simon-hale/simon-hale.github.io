@@ -1,0 +1,80 @@
+* { box-sizing: border-box; }
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  background: var(--bg);
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+html[data-theme-ready="true"] {
+  transition: background-color 200ms ease;
+}
+
+html[data-theme-ready="true"] body,
+html[data-theme-ready="true"] :where(
+  h1, h2, h3, p, button, a, .site-header, .site-footer, .eyebrow,
+  .section-heading__number, .work-row,
+  .academic-summary, .coursework, .honor-row, .detail-view, .detail-section,
+  .media-reveal, .media-reveal__error
+) {
+  transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease;
+}
+
+::selection { color: var(--text-primary); background: var(--selection-bg); }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button { color: inherit; }
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+.site-shell {
+  width: min(100%, var(--page-max));
+  min-height: 100vh;
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--text-secondary); }
+.eyebrow {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.085em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.16rem;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.text-link:hover { border-color: var(--accent); color: var(--accent); }
+
+@media (max-width: 640px) {
+  .site-shell { padding-inline: 1.125rem; }
+}
