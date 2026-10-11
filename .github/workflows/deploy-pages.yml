@@ -1,0 +1,69 @@
+
+name: Deploy Portfolio to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download prebuilt website
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          state="$(gh release view pages-staging \
+            --repo "$GH_REPO" \
+            --json isDraft \
+            --jq '.isDraft')"
+
+          if [ "$state" != "true" ]; then
+            echo "Expected a draft release: pages-staging"
+            exit 1
+          fi
+
+          mkdir -p archive site
+
+          gh release download pages-staging \
+            --repo "$GH_REPO" \
+            --pattern "portfolio-pages.zip" \
+            --dir archive
+
+          test -s archive/portfolio-pages.zip
+
+          unzip -q archive/portfolio-pages.zip -d site
+
+          test -s site/index.html
+          test -d site/assets
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site/
+          retention-days: 1
+
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
